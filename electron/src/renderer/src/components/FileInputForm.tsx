@@ -1,12 +1,28 @@
+import { useState } from "react"
 import { Button, FileInput } from "flowbite-react"
 
 import { sendImgPaths } from "../services/api"
 import "../styles/FileInputForm.css"
 
 export default function FileInputForm() {
-  const handleFilesRequest = async (): Promise<void> => {
+  const [isFiles, setIsFiles] = useState(false)
+
+  const handleFilesChange = () => {
     const fileInputElem: HTMLInputElement = document.getElementById("file-upload") as HTMLInputElement
-    const files = fileInputElem.files as FileList
+    const imageFiles = fileInputElem.files as FileList
+
+    if (imageFiles.length === 0) {
+      setIsFiles(false)
+    }
+    else {
+      setIsFiles(true)
+    }
+
+  }
+
+  const handleFilesRequest = async () => {
+    const fileInputElem: HTMLInputElement = document.getElementById("file-upload") as HTMLInputElement
+    const imageFiles = fileInputElem.files as FileList
     const yearOptionToggleElem = document.getElementById("year-option-toggle") as HTMLInputElement
 
     let yearOption = "YYYY"
@@ -15,8 +31,8 @@ export default function FileInputForm() {
     }
 
     let filePaths: string[] = []
-    for (let i = 0; i < files.length; i++) {
-      filePaths.push(files[i].path)
+    for (let i = 0; i < imageFiles.length; i++) {
+      filePaths.push(imageFiles[i].path)
     }
 
     const response = await sendImgPaths(filePaths, yearOption)
@@ -25,11 +41,16 @@ export default function FileInputForm() {
   return (
     <div className="flex flex-col sm:flex-row items-center justify-center mt-20">
       <div>
-        <FileInput className="dark w-96 border-0" id="file-upload" multiple />
+        <FileInput className="dark w-96 border-0" id="file-upload" onChange={() => handleFilesChange()} multiple />
       </div>
-      <Button id="btn-rename" color="blue" onClick={() => handleFilesRequest()}>
+      <Button
+        id="btn-rename"
+        className={`${!isFiles ? "active:bg-blue-700" : "active:bg-blue-900"}`}
+        color="blue"
+        onClick={() => handleFilesRequest()}
+        disabled={!isFiles}>
         Rename
       </Button>
-    </div>
+    </div >
   )
 }
