@@ -16,15 +16,20 @@ def _get_img_datetime(img_path: Path) -> datetime.datetime:
     return datetime.datetime.strptime(dt_str, "%Y:%m:%d %H:%M:%S")
 
 
-def _rename_filename(*, img_path: Path, dt: datetime.datetime) -> None:
-    dt_str = dt.strftime("%y%m%d_%H%M%S")
+def _rename_filename(*, img_path: Path, dt: datetime.datetime, year_option: str) -> None:
+    if year_option == "YY":
+        year_format = "%y"
+    else:
+        year_format = "%Y"
+
+    dt_str = dt.strftime(f"{year_format}%m%d_%H%M%S")
     new_name = f"{dt_str}_{img_path.name}"
     new_path = img_path.parent / new_name
     os.rename(img_path, new_path)
 
 
-def rename_images(paths: List[str]) -> None:
+def rename_images(*, paths: List[str], year_option: str) -> None:
     for path_str in paths:
         img_path = Path(path_str)
         img_dt = _get_img_datetime(img_path)
-        _rename_filename(img_path=img_path, dt=img_dt)
+        _rename_filename(img_path=img_path, dt=img_dt, year_option=year_option)

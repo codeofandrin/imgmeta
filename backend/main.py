@@ -19,11 +19,12 @@ app.add_middleware(
 
 class Base(BaseModel):
     paths: List[str]
+    year_option: str
 
 
 @app.post("/images")
 async def images(payload: Base):
-    rename_images(payload.paths)
+    rename_images(paths=payload.paths, year_option=payload.year_option)
     return {"msg": "Successful"}
 
 

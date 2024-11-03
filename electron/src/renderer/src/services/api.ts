@@ -31,8 +31,8 @@ async function request(
     return isError
 }
 
-export async function sendImgPaths(paths: string[]): Promise<boolean> {
-    const payload = { paths: paths }
+export async function sendImgPaths(paths: string[], yearOption: string): Promise<boolean> {
+    const payload = { paths: paths, "year_option": yearOption }
     const headers = { "Content-Type": "application/json" }
 
     return await request("POST", "/images", payload, headers)
