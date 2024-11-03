@@ -5,13 +5,17 @@ import "../styles/FileInput.css"
 
 export default function FileInputForm() {
   const handleFilesRequest = async (): Promise<void> => {
-    const fileInputElem = document.getElementById("file-upload") as HTMLInputElement
-    const filePaths = []
-    for (let i = 0; i < fileInputElem.files.length; i++) {
-      filePaths.push(fileInputElem.files[i].path)
-    }
+    const fileInputElem: HTMLInputElement = document.getElementById("file-upload") as HTMLInputElement
+    const files = fileInputElem.files
 
-    const response = await sendImgPaths(filePaths)
+    if (files !== null) {
+      let filePaths: string[] = []
+      for (let i = 0; i < files.length; i++) {
+        filePaths.push(files[i].path)
+      }
+
+      const response = await sendImgPaths(filePaths)
+    }
   }
 
   return (
