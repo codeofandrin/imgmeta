@@ -1,5 +1,5 @@
 #btn-rename {
-  @apply ml-0 sm:ml-10 mt-5 sm:mt-0 w-full sm:w-auto active:bg-blue-900;
+  @apply ml-0 sm:ml-10 mt-5 sm:mt-0 w-full sm:w-auto;
   @apply ring-0 !important;
 }
 

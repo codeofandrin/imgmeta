@@ -1,7 +1,7 @@
 import { Button, FileInput } from "flowbite-react"
 
 import { sendImgPaths } from "../services/api"
-import "../styles/FileInput.css"
+import "../styles/FileInputForm.css"
 
 export default function FileInputForm() {
   const handleFilesRequest = async (): Promise<void> => {
