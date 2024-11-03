@@ -1,0 +1,8 @@
+#btn-rename {
+  @apply ml-0 sm:ml-10 mt-5 sm:mt-0 w-full sm:w-auto active:bg-blue-900;
+  @apply ring-0 !important;
+}
+
+#file-upload {
+  @apply focus:ring-0 focus:border-slate-600 !important;
+}
