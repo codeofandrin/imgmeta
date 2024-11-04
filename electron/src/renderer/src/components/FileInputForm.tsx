@@ -39,7 +39,7 @@ export default function FileInputForm() {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center mt-20">
+    <div className="flex flex-col sm:flex-row items-center justify-center mt-14">
       <div>
         <FileInput className="dark w-96 border-0" id="file-upload" onChange={() => handleFilesChange()} multiple />
       </div>
