@@ -2,8 +2,8 @@ interface OptionTogglePropsType {
   className?: string
   id: string
   title: string
-  option1: string
-  option2: string
+  option1?: string
+  option2?: string
   isOnOff: boolean
 }
 
