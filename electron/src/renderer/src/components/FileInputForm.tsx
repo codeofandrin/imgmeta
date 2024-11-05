@@ -41,6 +41,7 @@ export default function FileInputForm() {
 
     await sendImgPaths(filePaths, yearOption, timeOption).then((isError: boolean) => {
       setIsLoading(false)
+      fileInputElem.value = ""
     })
   }
 
