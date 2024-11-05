@@ -24,18 +24,20 @@ export default function FileInputForm() {
     const fileInputElem: HTMLInputElement = document.getElementById("file-upload") as HTMLInputElement
     const imageFiles = fileInputElem.files as FileList
     const yearOptionToggleElem = document.getElementById("year-option-toggle") as HTMLInputElement
+    const timeOptionToggleElem = document.getElementById("time-option-toggle") as HTMLInputElement
 
     let yearOption = "YYYY"
     if (yearOptionToggleElem.checked) {
       yearOption = "YY"
     }
+    let timeOption = timeOptionToggleElem.checked
 
     let filePaths: string[] = []
     for (let i = 0; i < imageFiles.length; i++) {
       filePaths.push(imageFiles[i].path)
     }
 
-    const response = await sendImgPaths(filePaths, yearOption)
+    const response = await sendImgPaths(filePaths, yearOption, timeOption)
   }
 
   return (
