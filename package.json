@@ -2,7 +2,8 @@
     "scripts": {
         "dev": "concurrently \"npm run dev-backend\" \"npm run dev-electron\"",
         "dev-backend": "source venv/bin/activate && cd backend && python3.9 main.py",
-        "dev-electron": "cd electron && npm run dev"
+        "dev-electron": "cd electron && npm run dev",
+        "format": "cd backend && black . && pyright && cd ../electron && npm run format"
     },
     "dependencies": {
         "concurrently": "^9.0.1"

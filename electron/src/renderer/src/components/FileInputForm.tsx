@@ -13,11 +13,9 @@ export default function FileInputForm() {
 
     if (imageFiles.length === 0) {
       setIsFiles(false)
-    }
-    else {
+    } else {
       setIsFiles(true)
     }
-
   }
 
   const handleFilesRequest = async () => {
@@ -43,7 +41,12 @@ export default function FileInputForm() {
   return (
     <div className="flex flex-col sm:flex-row items-center justify-center mt-14">
       <div>
-        <FileInput className="dark w-96 border-0" id="file-upload" onChange={() => handleFilesChange()} multiple />
+        <FileInput
+          className="dark w-96 border-0"
+          id="file-upload"
+          onChange={() => handleFilesChange()}
+          multiple
+        />
       </div>
       <Button
         id="btn-rename"
@@ -53,6 +56,6 @@ export default function FileInputForm() {
         disabled={!isFiles}>
         Rename
       </Button>
-    </div >
+    </div>
   )
 }

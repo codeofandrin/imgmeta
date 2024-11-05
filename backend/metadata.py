@@ -16,9 +16,7 @@ def _get_img_datetime(img_path: Path) -> datetime.datetime:
     return datetime.datetime.strptime(dt_str, "%Y:%m:%d %H:%M:%S")
 
 
-def _rename_filename(
-    *, img_path: Path, dt: datetime.datetime, year_option: str, time_option: bool
-) -> None:
+def _rename_filename(*, img_path: Path, dt: datetime.datetime, year_option: str, time_option: bool) -> None:
     if year_option == "YY":
         year_format = "%y"
     else:
