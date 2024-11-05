@@ -3,9 +3,11 @@ import { Button, FileInput } from "flowbite-react"
 
 import { sendImgPaths } from "../services/api"
 import "../styles/FileInputForm.css"
+import SVGSpinner from "../assets/icons/Spinner.svg?react"
 
 export default function FileInputForm() {
   const [isFiles, setIsFiles] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleFilesChange = () => {
     const fileInputElem: HTMLInputElement = document.getElementById("file-upload") as HTMLInputElement
@@ -19,6 +21,8 @@ export default function FileInputForm() {
   }
 
   const handleFilesRequest = async () => {
+    setIsLoading(true)
+
     const fileInputElem: HTMLInputElement = document.getElementById("file-upload") as HTMLInputElement
     const imageFiles = fileInputElem.files as FileList
     const yearOptionToggleElem = document.getElementById("year-option-toggle") as HTMLInputElement
@@ -35,7 +39,9 @@ export default function FileInputForm() {
       filePaths.push(imageFiles[i].path)
     }
 
-    const response = await sendImgPaths(filePaths, yearOption, timeOption)
+    await sendImgPaths(filePaths, yearOption, timeOption).then((isError: boolean) => {
+      setIsLoading(false)
+    })
   }
 
   return (
@@ -54,7 +60,14 @@ export default function FileInputForm() {
         color="blue"
         onClick={() => handleFilesRequest()}
         disabled={!isFiles}>
-        Rename
+        {isLoading ? (
+          <div className="flex items-center ">
+            <SVGSpinner className="w-4 h-4 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" />
+            <span className="ml-2">Rename</span>
+          </div>
+        ) : (
+          "Rename"
+        )}
       </Button>
     </div>
   )

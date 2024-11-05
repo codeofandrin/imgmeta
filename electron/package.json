@@ -24,7 +24,8 @@
     "@electron-toolkit/utils": "^3.0.0",
     "axios": "^1.7.7",
     "electron-updater": "^6.1.7",
-    "flowbite-react": "^0.10.2"
+    "flowbite-react": "^0.10.2",
+    "vite-plugin-svgr": "^4.3.0"
   },
   "devDependencies": {
     "@electron-toolkit/tsconfig": "^1.0.1",
