@@ -5,6 +5,10 @@
 @tailwind utilities;
 
 :root {
-  @apply bg-slate-900 text-white;
-  font-family: Inter;
+    @apply bg-slate-900 text-white;
+    font-family: Inter;
+}
+
+button {
+    @apply ring-0 !important;
 }

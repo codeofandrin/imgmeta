@@ -2,9 +2,10 @@ import { useState, useRef, RefObject } from "react"
 import { Button, FileInput } from "flowbite-react"
 
 import { sendImgPaths } from "../services/api"
-import SVGSpinner from "../assets/icons/Spinner.svg?react"
 import Status from "./Status"
 import { FileInputStatusType } from "../utils/enums"
+import SVGSpinner from "../assets/icons/Spinner.svg?react"
+import SVGCross from "../assets/icons/Cross.svg?react"
 import "../styles/FileInputForm.css"
 
 interface ImageFilesType {
@@ -31,6 +32,12 @@ export default function FileInputForm() {
     } else {
       setFileInput({ ...fileInput, imageFiles: null })
     }
+  }
+
+  const handleFilesClear = () => {
+    console.log("handleFilesClear")
+    setFileInput({ ...fileInput, imageFiles: null })
+    fileInput.ref.current && (fileInput.ref.current.value = "")
   }
 
   const handleFilesRequest = async () => {
@@ -69,14 +76,23 @@ export default function FileInputForm() {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col sm:flex-row items-center justify-center mt-14">
-        <div>
+        <div className="flex">
           <FileInput
             ref={fileInput.ref}
-            className="dark w-96 border-0"
+            className={`dark w-96 border-0 ${fileInput.imageFiles !== null && "no-r-border"}`}
             id="file-upload"
             onChange={() => handleFilesChange()}
             multiple
           />
+          {fileInput.imageFiles !== null && (
+            <Button
+              className="flex items-center rounded-l-none"
+              color="failure"
+              size="xs"
+              onClick={() => handleFilesClear()}>
+              <SVGCross className="w-4 h-4 text-white" />
+            </Button>
+          )}
         </div>
         <Button
           id="btn-rename"
@@ -85,7 +101,7 @@ export default function FileInputForm() {
           onClick={() => handleFilesRequest()}
           disabled={!fileInput.imageFiles}>
           {isLoading ? (
-            <div className="flex items-center ">
+            <div className="flex items-center">
               <SVGSpinner className="w-4 h-4 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" />
               <span className="ml-2">Rename</span>
             </div>
