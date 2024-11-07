@@ -4,18 +4,18 @@ import { Button, FileInput } from "flowbite-react"
 import { sendImgPaths } from "../services/api"
 import SVGSpinner from "../assets/icons/Spinner.svg?react"
 import Status from "./Status"
+import { FileInputStatusType } from "../utils/enums"
 import "../styles/FileInputForm.css"
 
 export default function FileInputForm() {
+  const [status, setStatus] = useState<FileInputStatusType | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [showStatus, setShowStatus] = useState(false)
-  const [isError, setIsError] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [imageFiles, setImageFiles] = useState<FileList | null>(null)
   const [renamedFilesAmount, setRenamedFilesAmount] = useState(0)
 
   const handleFilesChange = () => {
-    setShowStatus(false)
+    setStatus(null)
 
     const imageFiles = fileInputRef.current?.files as FileList
     if (imageFiles.length > 0) {
@@ -45,15 +45,20 @@ export default function FileInputForm() {
     }
 
     await sendImgPaths(filePaths, yearOption, timeOption).then((isError: boolean) => {
-      setIsError(isError)
-      setShowStatus(true)
       setIsLoading(false)
+      if (isError) {
+        setStatus(FileInputStatusType.error)
+      } else {
+        setStatus(FileInputStatusType.success)
+      }
       setRenamedFilesAmount(imageFiles ? imageFiles.length : 0)
 
       fileInputRef.current && (fileInputRef.current.value = "")
       setImageFiles(null)
     })
   }
+
+  console.log(status)
 
   return (
     <div className="flex flex-col">
@@ -83,7 +88,7 @@ export default function FileInputForm() {
           )}
         </Button>
       </div>
-      {showStatus && <Status isError={isError} filesAmount={renamedFilesAmount} />}
+      {status !== null && <Status isError={status === FileInputStatusType.error} filesAmount={renamedFilesAmount} />}
     </div>
   )
 }
