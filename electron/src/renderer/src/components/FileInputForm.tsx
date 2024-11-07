@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, RefObject } from "react"
 import { Button, FileInput } from "flowbite-react"
 
 import { sendImgPaths } from "../services/api"
@@ -7,21 +7,29 @@ import Status from "./Status"
 import { FileInputStatusType } from "../utils/enums"
 import "../styles/FileInputForm.css"
 
+interface ImageFilesType {
+  ref: RefObject<HTMLInputElement>
+  imageFiles: FileList | null
+  renamedAmount: number
+}
+
 export default function FileInputForm() {
   const [status, setStatus] = useState<FileInputStatusType | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const [imageFiles, setImageFiles] = useState<FileList | null>(null)
-  const [renamedFilesAmount, setRenamedFilesAmount] = useState(0)
+  const [fileInput, setFileInput] = useState<ImageFilesType>({
+    ref: useRef<HTMLInputElement>(null),
+    imageFiles: null,
+    renamedAmount: 0
+  })
 
   const handleFilesChange = () => {
     setStatus(null)
 
-    const imageFiles = fileInputRef.current?.files as FileList
+    const imageFiles = fileInput.ref.current?.files as FileList
     if (imageFiles.length > 0) {
-      setImageFiles(imageFiles)
+      setFileInput({ ...fileInput, imageFiles })
     } else {
-      setImageFiles(null)
+      setFileInput({ ...fileInput, imageFiles: null })
     }
   }
 
@@ -38,6 +46,7 @@ export default function FileInputForm() {
     let timeOption = timeOptionToggleElem.checked
 
     let filePaths: string[] = []
+    const imageFiles = fileInput.imageFiles
     if (imageFiles) {
       for (let i = 0; i < imageFiles.length; i++) {
         filePaths.push(imageFiles[i].path)
@@ -51,21 +60,18 @@ export default function FileInputForm() {
       } else {
         setStatus(FileInputStatusType.success)
       }
-      setRenamedFilesAmount(imageFiles ? imageFiles.length : 0)
 
-      fileInputRef.current && (fileInputRef.current.value = "")
-      setImageFiles(null)
+      setFileInput({ ...fileInput, renamedAmount: imageFiles ? imageFiles.length : 0, imageFiles: null })
+      fileInput.ref.current && (fileInput.ref.current.value = "")
     })
   }
-
-  console.log(status)
 
   return (
     <div className="flex flex-col">
       <div className="flex flex-col sm:flex-row items-center justify-center mt-14">
         <div>
           <FileInput
-            ref={fileInputRef}
+            ref={fileInput.ref}
             className="dark w-96 border-0"
             id="file-upload"
             onChange={() => handleFilesChange()}
@@ -74,10 +80,10 @@ export default function FileInputForm() {
         </div>
         <Button
           id="btn-rename"
-          className={`${!imageFiles ? "active:bg-blue-700" : "active:bg-blue-900"}`}
+          className={`${!fileInput.imageFiles ? "active:bg-blue-700" : "active:bg-blue-900"}`}
           color="blue"
           onClick={() => handleFilesRequest()}
-          disabled={!imageFiles}>
+          disabled={!fileInput.imageFiles}>
           {isLoading ? (
             <div className="flex items-center ">
               <SVGSpinner className="w-4 h-4 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" />
@@ -88,7 +94,9 @@ export default function FileInputForm() {
           )}
         </Button>
       </div>
-      {status !== null && <Status isError={status === FileInputStatusType.error} filesAmount={renamedFilesAmount} />}
+      {status !== null && (
+        <Status isError={status === FileInputStatusType.error} filesAmount={fileInput.renamedAmount} />
+      )}
     </div>
   )
 }
