@@ -45,12 +45,14 @@ export default function FileInputForm() {
 
     const yearOptionToggleElem = document.getElementById("year-option-toggle") as HTMLInputElement
     const timeOptionToggleElem = document.getElementById("time-option-toggle") as HTMLInputElement
+    const customTextElem = document.getElementById("custom-text-input") as HTMLInputElement
 
     let yearOption = "YYYY"
     if (yearOptionToggleElem.checked) {
       yearOption = "YY"
     }
     let timeOption = timeOptionToggleElem.checked
+    let customText = customTextElem.value
 
     let filePaths: string[] = []
     const imageFiles = fileInput.imageFiles
@@ -60,7 +62,7 @@ export default function FileInputForm() {
       }
     }
 
-    await sendImgPaths(filePaths, yearOption, timeOption).then((isError: boolean) => {
+    await sendImgPaths(filePaths, yearOption, timeOption, customText).then((isError: boolean) => {
       setIsLoading(false)
       if (isError) {
         setStatus(FileInputStatusType.error)
@@ -74,6 +76,7 @@ export default function FileInputForm() {
         imageFiles: null
       })
       fileInput.ref.current && (fileInput.ref.current.value = "")
+      customTextElem.value = ""
     })
   }
 

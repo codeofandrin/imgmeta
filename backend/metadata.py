@@ -16,24 +16,30 @@ def _get_img_datetime(img_path: Path) -> datetime.datetime:
     return datetime.datetime.strptime(dt_str, "%Y:%m:%d %H:%M:%S")
 
 
-def _rename_filename(*, img_path: Path, dt: datetime.datetime, year_option: str, time_option: bool) -> None:
+def _rename_filename(
+    *, img_path: Path, dt: datetime.datetime, year_option: str, time_option: bool, custom_text: str
+) -> None:
     if year_option == "YY":
         year_format = "%y"
     else:
         year_format = "%Y"
 
     if time_option:
-        format_str = f"{year_format}%m%d_%H%M%S"
+        dt_format = f"{year_format}%m%d_%H%M%S"
     else:
-        format_str = f"{year_format}%m%d"
+        dt_format = f"{year_format}%m%d"
 
+    if custom_text:
+        custom_text = f"_{custom_text}"
+
+    format_str = f"{dt_format}{custom_text}"
     dt_str = dt.strftime(format_str)
     new_name = f"{dt_str}_{img_path.name}"
     new_path = img_path.parent / new_name
     os.rename(img_path, new_path)
 
 
-def rename_images(*, paths: List[str], year_option: str, time_option: bool) -> None:
+def rename_images(*, paths: List[str], year_option: str, time_option: bool, custom_text: str) -> None:
     for path_str in paths:
         img_path = Path(path_str)
         img_dt = _get_img_datetime(img_path)
@@ -42,4 +48,5 @@ def rename_images(*, paths: List[str], year_option: str, time_option: bool) -> N
             dt=img_dt,
             year_option=year_option,
             time_option=time_option,
+            custom_text=custom_text,
         )

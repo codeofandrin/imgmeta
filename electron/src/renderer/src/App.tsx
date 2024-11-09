@@ -1,5 +1,6 @@
 import Options from "./components/Options"
 import FileInputForm from "./components/FileInputForm"
+import CustomTextInput from "./components/CustomTextInput"
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
       </div>
       <div className="flex w-full flex-col items-center">
         <Options />
+        <CustomTextInput />
         <FileInputForm />
       </div>
     </div>

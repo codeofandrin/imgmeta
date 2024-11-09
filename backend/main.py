@@ -21,6 +21,7 @@ class Base(BaseModel):
     paths: List[str]
     year_option: str
     time_option: bool
+    custom_text: str
 
 
 @app.post("/images")
@@ -29,6 +30,7 @@ async def images(payload: Base):
         paths=payload.paths,
         year_option=payload.year_option,
         time_option=payload.time_option,
+        custom_text=payload.custom_text,
     )
     return {"msg": "Successful"}
 

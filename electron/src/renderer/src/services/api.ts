@@ -34,12 +34,14 @@ async function request(
 export async function sendImgPaths(
     paths: string[],
     yearOption: string,
-    timeOption: boolean
+    timeOption: boolean,
+    customText: string
 ): Promise<boolean> {
     const payload = {
         paths: paths,
         year_option: yearOption,
-        time_option: timeOption
+        time_option: timeOption,
+        custom_text: customText
     }
     const headers = { "Content-Type": "application/json" }
 
