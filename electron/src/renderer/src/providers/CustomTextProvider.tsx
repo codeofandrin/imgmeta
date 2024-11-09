@@ -8,10 +8,10 @@ interface CustomTextContextPropsType {
 
 export default function CustomTextProvider({ children }: CustomTextContextPropsType) {
   const [_customText, _setCustomText] = useState<string>("")
-  const setCustomText = (text: string) => {
+  function setCustomText(text: string) {
     _setCustomText(text)
   }
-  const resetCustomText = () => {
+  function resetCustomText() {
     _setCustomText("")
   }
 

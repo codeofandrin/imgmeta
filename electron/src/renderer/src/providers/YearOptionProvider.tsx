@@ -8,10 +8,10 @@ interface YearOptionProviderPropsType {
 
 export default function YearOptionProvider({ children }: YearOptionProviderPropsType) {
   const [_yearFormat, _setYearFormat] = useState<string>("YYYY")
-  const setFullYear = () => {
+  function setFullYear() {
     _setYearFormat("YYYY")
   }
-  const setShortYear = () => {
+  function setShortYear() {
     _setYearFormat("YY")
   }
 

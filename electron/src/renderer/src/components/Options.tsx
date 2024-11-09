@@ -6,11 +6,11 @@ export default function Options() {
   const { setFullYear, setShortYear } = useYearOptionContext()
   const { setTimeDisplayed } = useTimeOptionContext()
 
-  const handleYearOptionChange = (e) => {
+  function handleYearOptionChange(e) {
     e.target.checked ? setShortYear() : setFullYear()
   }
 
-  const handleTimeOptionChange = (e) => {
+  function handleTimeOptionChange(e) {
     setTimeDisplayed(e.target.checked)
   }
 
@@ -22,7 +22,7 @@ export default function Options() {
         option1="YYYY"
         option2="YY"
         isOnOff={false}
-        onChange={(e) => handleYearOptionChange(e)}
+        onChange={handleYearOptionChange}
       />
       <OptionToggle
         className="mt-5"
@@ -30,7 +30,7 @@ export default function Options() {
         title="Display Time"
         isOnOff={true}
         defaultOn={true}
-        onChange={(e) => handleTimeOptionChange(e)}
+        onChange={handleTimeOptionChange}
       />
     </div>
   )

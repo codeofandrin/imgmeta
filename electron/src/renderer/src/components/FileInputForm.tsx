@@ -29,7 +29,7 @@ export default function FileInputForm() {
   const { timeDisplayed } = useTimeOptionContext()
   const { customText, resetCustomText } = useCustomTextContext()
 
-  const handleFilesChange = () => {
+  function handleFilesChange() {
     setStatus(null)
 
     const imageFiles = fileInput.ref.current?.files as FileList
@@ -40,12 +40,12 @@ export default function FileInputForm() {
     }
   }
 
-  const handleFilesClear = () => {
+  function handleFilesClear() {
     setFileInput({ ...fileInput, imageFiles: null })
     fileInput.ref.current && (fileInput.ref.current.value = "")
   }
 
-  const handleFilesRequest = async () => {
+  async function handleFilesRequest() {
     setIsLoading(true)
 
     let filePaths: string[] = []
@@ -82,7 +82,7 @@ export default function FileInputForm() {
             ref={fileInput.ref}
             className={`dark w-96 border-0 ${fileInput.imageFiles !== null && "no-r-border"}`}
             id="file-upload"
-            onChange={() => handleFilesChange()}
+            onChange={handleFilesChange}
             multiple
           />
           {fileInput.imageFiles !== null && (
@@ -90,7 +90,7 @@ export default function FileInputForm() {
               className="flex items-center rounded-l-none"
               color="failure"
               size="xs"
-              onClick={() => handleFilesClear()}>
+              onClick={handleFilesClear}>
               <SVGCross className="h-4 w-4 text-white" />
             </Button>
           )}
@@ -99,7 +99,7 @@ export default function FileInputForm() {
           id="btn-rename"
           className={`${!fileInput.imageFiles ? "active:bg-blue-700" : "active:bg-blue-900"}`}
           color="blue"
-          onClick={() => handleFilesRequest()}
+          onClick={handleFilesRequest}
           disabled={!fileInput.imageFiles}>
           {isLoading ? (
             <div className="flex items-center">
