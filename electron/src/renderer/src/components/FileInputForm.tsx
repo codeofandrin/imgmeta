@@ -35,7 +35,6 @@ export default function FileInputForm() {
   }
 
   const handleFilesClear = () => {
-    console.log("handleFilesClear")
     setFileInput({ ...fileInput, imageFiles: null })
     fileInput.ref.current && (fileInput.ref.current.value = "")
   }
