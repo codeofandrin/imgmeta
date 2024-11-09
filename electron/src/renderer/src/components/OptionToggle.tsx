@@ -17,7 +17,7 @@ export default function OptionToggle({
 }: OptionTogglePropsType) {
   return (
     <div className={`flex flex-col items-center ${className}`}>
-      <h3 className="text-sm">{title}</h3>
+      <h3 className="text-sm font-medium">{title}</h3>
       <div className="mt-2 w-full">
         <div className="flex items-center">
           <div className="inline-flex w-1/2 justify-end">
