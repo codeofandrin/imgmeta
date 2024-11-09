@@ -4,14 +4,14 @@ import useTimeOptionContext from "../contexts/TimeOptionContext"
 
 export default function Options() {
   const { setFullYear, setShortYear } = useYearOptionContext()
-  const { setDisplayed } = useTimeOptionContext()
+  const { setTimeDisplayed } = useTimeOptionContext()
 
   const handleYearOptionChange = (e) => {
     e.target.checked ? setShortYear() : setFullYear()
   }
 
   const handleTimeOptionChange = (e) => {
-    setDisplayed(e.target.checked)
+    setTimeDisplayed(e.target.checked)
   }
 
   return (
