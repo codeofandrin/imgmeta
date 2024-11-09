@@ -11,6 +11,49 @@ import SVGSpinner from "../assets/icons/Spinner.svg?react"
 import SVGCross from "../assets/icons/Cross.svg?react"
 import "../styles/FileInputForm.css"
 
+function FileInputWithClear({ fileInput, handleFilesChange, handleFilesClear }) {
+  return (
+    <div className="flex">
+      <FileInput
+        ref={fileInput.ref}
+        className={`dark w-96 border-0 ${fileInput.imageFiles !== null && "no-r-border"}`}
+        id="file-upload"
+        onChange={handleFilesChange}
+        multiple
+      />
+      {fileInput.imageFiles !== null && (
+        <Button
+          className="flex items-center rounded-l-none"
+          color="failure"
+          size="xs"
+          onClick={handleFilesClear}>
+          <SVGCross className="h-4 w-4 text-white" />
+        </Button>
+      )}
+    </div>
+  )
+}
+
+function RenameButton({ disabled, isLoading, handleFilesRequest }) {
+  return (
+    <Button
+      id="btn-rename"
+      className={`${!disabled && "active"}`}
+      color="blue"
+      onClick={handleFilesRequest}
+      disabled={disabled}>
+      {isLoading ? (
+        <div className="flex items-center">
+          <SVGSpinner className="h-4 w-4 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600" />
+          <span className="ml-2">Rename</span>
+        </div>
+      ) : (
+        "Rename"
+      )}
+    </Button>
+  )
+}
+
 interface ImageFilesType {
   ref: RefObject<HTMLInputElement>
   imageFiles: FileList | null
@@ -79,39 +122,16 @@ export default function FileInputForm() {
   return (
     <div className="mt-10 flex flex-col">
       <div className="flex flex-col items-center justify-center sm:flex-row">
-        <div className="flex">
-          <FileInput
-            ref={fileInput.ref}
-            className={`dark w-96 border-0 ${fileInput.imageFiles !== null && "no-r-border"}`}
-            id="file-upload"
-            onChange={handleFilesChange}
-            multiple
-          />
-          {fileInput.imageFiles !== null && (
-            <Button
-              className="flex items-center rounded-l-none"
-              color="failure"
-              size="xs"
-              onClick={handleFilesClear}>
-              <SVGCross className="h-4 w-4 text-white" />
-            </Button>
-          )}
-        </div>
-        <Button
-          id="btn-rename"
-          className={`${!renameBtnDisabled && "active"}`}
-          color="blue"
-          onClick={handleFilesRequest}
-          disabled={renameBtnDisabled}>
-          {isLoading ? (
-            <div className="flex items-center">
-              <SVGSpinner className="h-4 w-4 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600" />
-              <span className="ml-2">Rename</span>
-            </div>
-          ) : (
-            "Rename"
-          )}
-        </Button>
+        <FileInputWithClear
+          fileInput={fileInput}
+          handleFilesChange={handleFilesChange}
+          handleFilesClear={handleFilesClear}
+        />
+        <RenameButton
+          disabled={renameBtnDisabled}
+          isLoading={isLoading}
+          handleFilesRequest={handleFilesRequest}
+        />
       </div>
       {status !== null && (
         <Status isError={status === FileInputStatusType.error} filesAmount={fileInput.renamedAmount} />
