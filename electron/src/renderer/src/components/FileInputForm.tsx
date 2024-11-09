@@ -68,14 +68,18 @@ export default function FileInputForm() {
         setStatus(FileInputStatusType.success)
       }
 
-      setFileInput({ ...fileInput, renamedAmount: imageFiles ? imageFiles.length : 0, imageFiles: null })
+      setFileInput({
+        ...fileInput,
+        renamedAmount: imageFiles ? imageFiles.length : 0,
+        imageFiles: null
+      })
       fileInput.ref.current && (fileInput.ref.current.value = "")
     })
   }
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col sm:flex-row items-center justify-center mt-14">
+      <div className="mt-14 flex flex-col items-center justify-center sm:flex-row">
         <div className="flex">
           <FileInput
             ref={fileInput.ref}
@@ -90,7 +94,7 @@ export default function FileInputForm() {
               color="failure"
               size="xs"
               onClick={() => handleFilesClear()}>
-              <SVGCross className="w-4 h-4 text-white" />
+              <SVGCross className="h-4 w-4 text-white" />
             </Button>
           )}
         </div>
@@ -102,7 +106,7 @@ export default function FileInputForm() {
           disabled={!fileInput.imageFiles}>
           {isLoading ? (
             <div className="flex items-center">
-              <SVGSpinner className="w-4 h-4 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" />
+              <SVGSpinner className="h-4 w-4 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600" />
               <span className="ml-2">Rename</span>
             </div>
           ) : (

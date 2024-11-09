@@ -36,7 +36,11 @@ export async function sendImgPaths(
     yearOption: string,
     timeOption: boolean
 ): Promise<boolean> {
-    const payload = { paths: paths, year_option: yearOption, time_option: timeOption }
+    const payload = {
+        paths: paths,
+        year_option: yearOption,
+        time_option: timeOption
+    }
     const headers = { "Content-Type": "application/json" }
 
     return await request("POST", "/images", payload, headers)

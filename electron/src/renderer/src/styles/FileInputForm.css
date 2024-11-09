@@ -1,9 +1,9 @@
 #btn-rename {
-    @apply ml-0 sm:ml-10 mt-5 sm:mt-0 w-full sm:w-auto;
+    @apply ml-0 mt-5 w-full sm:ml-10 sm:mt-0 sm:w-auto;
 }
 
 #file-upload {
-    @apply focus:ring-0 focus:border-slate-600 !important;
+    @apply focus:border-slate-600 focus:ring-0 !important;
 }
 
 .no-r-border input {
