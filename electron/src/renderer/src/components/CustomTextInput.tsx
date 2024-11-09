@@ -1,8 +1,15 @@
 import { Tooltip } from "flowbite-react"
 
+import useCustomTextContext from "../contexts/CustomTextContext"
 import SVGInfo from "../assets/icons/Info.svg?react"
 
 export default function CustomTextInput() {
+  const { customText, setCustomText } = useCustomTextContext()
+
+  const handleCustomTextChange = (e) => {
+    setCustomText(e.target.value)
+  }
+
   return (
     <div className="mt-5">
       <div className="mb-2 flex items-center">
@@ -20,7 +27,9 @@ export default function CustomTextInput() {
         type="text"
         id="custom-text-input"
         placeholder="Enter text"
+        value={customText}
         className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5 text-sm text-white focus:border-blue-500 focus:ring-blue-500"
+        onChange={(e) => handleCustomTextChange(e)}
       />
     </div>
   )
