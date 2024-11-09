@@ -11,6 +11,8 @@ export interface TimeOptionContextType {
 
 export interface CustomTextContextType {
     customText: string
+    isValid: boolean
     setCustomText: Function
     resetCustomText: Function
+    setIsValid: Function
 }

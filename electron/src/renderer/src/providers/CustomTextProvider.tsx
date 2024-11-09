@@ -8,6 +8,7 @@ interface CustomTextContextPropsType {
 
 export default function CustomTextProvider({ children }: CustomTextContextPropsType) {
   const [_customText, _setCustomText] = useState<string>("")
+  const [isValid, setIsValid] = useState<boolean>(true)
   function setCustomText(text: string) {
     _setCustomText(text)
   }
@@ -17,8 +18,10 @@ export default function CustomTextProvider({ children }: CustomTextContextPropsT
 
   const contextValue = {
     customText: _customText,
+    isValid,
     setCustomText,
-    resetCustomText
+    resetCustomText,
+    setIsValid
   }
 
   return <CustomTextContext.Provider value={contextValue}>{children}</CustomTextContext.Provider>

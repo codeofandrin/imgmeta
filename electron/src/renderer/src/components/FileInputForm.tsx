@@ -27,7 +27,7 @@ export default function FileInputForm() {
   })
   const { yearFormat } = useYearOptionContext()
   const { timeDisplayed } = useTimeOptionContext()
-  const { customText, resetCustomText } = useCustomTextContext()
+  const { customText, isValid: isCustomTextValid, resetCustomText } = useCustomTextContext()
 
   function handleFilesChange() {
     setStatus(null)
@@ -74,9 +74,11 @@ export default function FileInputForm() {
     })
   }
 
+  const renameBtnDisabled = !fileInput.imageFiles || !isCustomTextValid
+
   return (
-    <div className="flex flex-col">
-      <div className="mt-14 flex flex-col items-center justify-center sm:flex-row">
+    <div className="mt-10 flex flex-col">
+      <div className="flex flex-col items-center justify-center sm:flex-row">
         <div className="flex">
           <FileInput
             ref={fileInput.ref}
@@ -97,10 +99,10 @@ export default function FileInputForm() {
         </div>
         <Button
           id="btn-rename"
-          className={`${!fileInput.imageFiles ? "active:bg-blue-700" : "active:bg-blue-900"}`}
+          className={`${!renameBtnDisabled && "active"}`}
           color="blue"
           onClick={handleFilesRequest}
-          disabled={!fileInput.imageFiles}>
+          disabled={renameBtnDisabled}>
           {isLoading ? (
             <div className="flex items-center">
               <SVGSpinner className="h-4 w-4 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600" />

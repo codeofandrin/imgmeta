@@ -4,8 +4,10 @@ import { CustomTextContextType } from "../utils/types"
 
 export const CustomTextContext = createContext<CustomTextContextType>({
     customText: "",
+    isValid: true,
     setCustomText: () => {},
-    resetCustomText: () => {}
+    resetCustomText: () => {},
+    setIsValid: () => {}
 })
 
 export default function useCustomTextContext(): CustomTextContextType {
