@@ -1,4 +1,4 @@
-appId: com.imgmeta.app
+appId: com.electron.imgmeta
 productName: imgmeta
 directories:
   buildResources: build
