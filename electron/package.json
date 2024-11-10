@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Organize your files by adding date and time from metadata to filenames.",
   "main": "./out/main/index.js",
-  "author": "example.com",
-  "homepage": "https://electron-vite.org",
+  "author": "Puncher1",
+  "homepage": "https://github.com/puncher1",
   "scripts": {
     "format": "prettier --write --list-different .",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
