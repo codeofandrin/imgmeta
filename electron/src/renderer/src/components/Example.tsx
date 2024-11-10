@@ -4,7 +4,15 @@ import useYearOptionContext from "../contexts/YearOptionContext"
 import useTimeOptionContext from "../contexts/TimeOptionContext"
 import useCustomTextContext from "../contexts/CustomTextContext"
 
-const MAX_CUSTOMTEXT_LEN = 30
+const MAX_CUSTOMTEXT_LEN_SM = 30
+const MAX_CUSTOMTEXT_LEN = 20
+
+function getTruncatedText(text: string, maxLen: number): string {
+  if (text.length > maxLen) {
+    return text.substring(0, maxLen - 3) + "..."
+  }
+  return text
+}
 
 export default function Example() {
   const { yearFormat } = useYearOptionContext()
@@ -26,12 +34,17 @@ export default function Example() {
     dateTimeStr += `_${hour}${minute}${second}`
   }
 
+  let fileNameStr_sm = ""
+  if (customText) {
+    let truncatedCustomText = getTruncatedText(customText, MAX_CUSTOMTEXT_LEN_SM)
+    fileNameStr_sm = `${dateTimeStr}_${truncatedCustomText}_myFile.png`
+  } else {
+    fileNameStr_sm = `${dateTimeStr}_myFile.png`
+  }
+
   let fileNameStr = ""
   if (customText) {
-    let truncatedCustomText = customText
-    if (customText.length > MAX_CUSTOMTEXT_LEN) {
-      truncatedCustomText = customText.substring(0, MAX_CUSTOMTEXT_LEN - 3) + "..."
-    }
+    let truncatedCustomText = getTruncatedText(customText, MAX_CUSTOMTEXT_LEN)
     fileNameStr = `${dateTimeStr}_${truncatedCustomText}_myFile.png`
   } else {
     fileNameStr = `${dateTimeStr}_myFile.png`
@@ -40,7 +53,8 @@ export default function Example() {
   return (
     <div className="mt-5 sm:mt-10">
       <h3 className="text-center text-sm font-medium">Example Output</h3>
-      <p className="mt-1 text-sm">{fileNameStr}</p>
+      <p className="mt-1 hidden text-sm sm:block">{fileNameStr_sm}</p>
+      <p className="mt-1 text-sm sm:hidden">{fileNameStr}</p>
     </div>
   )
 }
