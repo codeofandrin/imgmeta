@@ -42,6 +42,10 @@ def _rename_filename(
 def rename_images(*, paths: List[str], year_option: str, time_option: bool, custom_text: str) -> None:
     for path_str in paths:
         img_path = Path(path_str)
+
+        if img_path.suffix not in [".png", ".jpeg", ".jpg"]:
+            raise ValueError("files must be one of '.png', '.jpeg', '.jpg'")
+
         img_dt = _get_img_datetime(img_path)
         _rename_filename(
             img_path=img_path,

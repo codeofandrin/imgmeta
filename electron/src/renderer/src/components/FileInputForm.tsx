@@ -20,6 +20,7 @@ function FileInputWithClear({ fileInput, handleFilesChange, handleFilesClear }) 
         id="file-upload"
         onChange={handleFilesChange}
         multiple
+        accept="image/png, image/jpeg"
       />
       {fileInput.imageFiles !== null && (
         <Button
