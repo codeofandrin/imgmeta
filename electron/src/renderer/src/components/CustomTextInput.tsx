@@ -20,7 +20,7 @@ export default function CustomTextInput() {
   }
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 sm:ml-10 sm:mt-0 sm:min-w-36">
       <div className="mb-2 flex items-center">
         <label htmlFor="custom-text-input" className="block text-sm font-medium text-white">
           Custom text

@@ -16,8 +16,10 @@ export default function App() {
           <p className="mt-4">Add date and time to image file name.</p>
         </div>
         <div className="flex w-full flex-col items-center">
-          <Options />
-          <CustomTextInput />
+          <div className="mt-10 flex flex-col sm:flex-row sm:items-start">
+            <Options />
+            <CustomTextInput />
+          </div>
           <Example />
           <FileInputForm />
         </div>

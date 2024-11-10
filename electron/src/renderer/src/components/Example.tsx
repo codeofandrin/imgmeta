@@ -38,7 +38,7 @@ export default function Example() {
   }
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 sm:mt-10">
       <h3 className="text-center text-sm font-medium">Example Output</h3>
       <p className="mt-1 text-sm">{fileNameStr}</p>
     </div>

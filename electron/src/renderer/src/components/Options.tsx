@@ -15,7 +15,7 @@ export default function Options() {
   }
 
   return (
-    <div className="mt-10 w-full">
+    <div className="w-full">
       <OptionToggle
         id="year-option-toggle"
         title="Year Format"
