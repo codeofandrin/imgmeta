@@ -1,4 +1,4 @@
-import { useState, useRef, RefObject, useContext } from "react"
+import { useState, useRef, RefObject } from "react"
 import { Button, FileInput } from "flowbite-react"
 
 import { sendImgPaths } from "../services/api"
