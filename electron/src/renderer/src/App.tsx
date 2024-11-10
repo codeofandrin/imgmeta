@@ -5,6 +5,7 @@ import CustomTextProvider from "./providers/CustomTextProvider"
 import Options from "./components/Options"
 import FileInputForm from "./components/FileInputForm"
 import CustomTextInput from "./components/CustomTextInput"
+import Example from "./components/Example"
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <div className="flex w-full flex-col items-center">
           <Options />
           <CustomTextInput />
+          <Example />
           <FileInputForm />
         </div>
       </>
