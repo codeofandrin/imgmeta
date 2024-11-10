@@ -16,7 +16,7 @@ function FileInputWithClear({ fileInput, handleFilesChange, handleFilesClear }) 
     <div className="flex">
       <FileInput
         ref={fileInput.ref}
-        className={`dark w-96 border-0 ${fileInput.imageFiles !== null && "no-r-border"}`}
+        className={`dark w-72 border-0 xs:w-80 sm:w-96 ${fileInput.imageFiles !== null && "no-r-border"}`}
         id="file-upload"
         onChange={handleFilesChange}
         multiple
@@ -42,14 +42,12 @@ function RenameButton({ disabled, isLoading, handleRenameRequest }) {
       color="blue"
       onClick={handleRenameRequest}
       disabled={disabled}>
-      {isLoading ? (
-        <div className="flex items-center">
+      <div className="flex items-center">
+        {isLoading && (
           <SVGSpinner className="h-4 w-4 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600" />
-          <span className="ml-2">Rename</span>
-        </div>
-      ) : (
-        "Rename"
-      )}
+        )}
+        <span className={`${isLoading && "ml-2"}`}>Rename</span>
+      </div>
     </Button>
   )
 }
