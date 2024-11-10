@@ -34,13 +34,13 @@ function FileInputWithClear({ fileInput, handleFilesChange, handleFilesClear }) 
   )
 }
 
-function RenameButton({ disabled, isLoading, handleFilesRequest }) {
+function RenameButton({ disabled, isLoading, handleRenameRequest }) {
   return (
     <Button
       id="btn-rename"
       className={`${!disabled && "active"}`}
       color="blue"
-      onClick={handleFilesRequest}
+      onClick={handleRenameRequest}
       disabled={disabled}>
       {isLoading ? (
         <div className="flex items-center">
@@ -88,7 +88,7 @@ export default function FileInputForm() {
     fileInput.ref.current && (fileInput.ref.current.value = "")
   }
 
-  async function handleFilesRequest() {
+  async function handleRenameRequest() {
     setIsLoading(true)
 
     let filePaths: string[] = []
@@ -130,7 +130,7 @@ export default function FileInputForm() {
         <RenameButton
           disabled={renameBtnDisabled}
           isLoading={isLoading}
-          handleFilesRequest={handleFilesRequest}
+          handleRenameRequest={handleRenameRequest}
         />
       </div>
       {status !== null && (
