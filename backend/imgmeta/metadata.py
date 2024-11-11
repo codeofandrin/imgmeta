@@ -5,8 +5,8 @@ from typing import List
 
 from PIL import Image
 
-from errors import APIException, APIExceptionDetail
-from enums import ErrorType
+from .errors import APIException, APIExceptionDetail
+from .enums import ErrorType
 
 
 EXIF_DATETIME_TAG = 36867
