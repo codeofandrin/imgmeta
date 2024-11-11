@@ -1,4 +1,5 @@
 from typing import List
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,9 +9,17 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .metadata import rename_images
 from .errors import catch_exceptions_middleware
+from .utils import setup_logging
 
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # setup logging on startup
+    setup_logging()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 app.middleware("http")(catch_exceptions_middleware)
 app.add_middleware(
     CORSMiddleware,
