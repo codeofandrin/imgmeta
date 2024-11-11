@@ -6,7 +6,7 @@
         "dev-backend": "source venv/bin/activate && cd backend && python3.9 main.py",
         "dev-electron": "cd electron && npm run dev",
         "start-electron": "cd electron && npm run start",
-        "build-backend": "cd backend && pyinstaller main.spec",
+        "build-backend": "cd backend && pyinstaller build.spec",
         "build-electron:mac": "cd electron && npm run build:mac",
         "format": "cd backend && black . && cd ../electron && npm run format",
         "typecheck": "cd backend && pyright && cd ../electron && npm run typecheck"
