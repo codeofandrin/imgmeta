@@ -18,7 +18,7 @@ export default function Example() {
   const { yearFormat } = useYearOptionContext()
   const { timeDisplayed } = useTimeOptionContext()
   const { customText } = useCustomTextContext()
-  const [now] = useState(new Date("2001-01-02T09:01:02"))
+  const [now] = useState(new Date())
 
   const day = now.getDate()
   const month = now.getMonth() + 1
