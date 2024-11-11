@@ -1,7 +1,7 @@
 {
   "name": "imgmeta",
   "version": "1.0.0",
-  "description": "Organize your files by adding date and time from metadata to filenames.",
+  "description": "Organize your files by adding the date and time to the filenames.",
   "main": "./out/main/index.js",
   "author": "Puncher1",
   "homepage": "https://github.com/puncher1",
