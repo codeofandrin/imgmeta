@@ -1,6 +1,15 @@
 import { app, shell, BrowserWindow } from "electron"
 import { join } from "path"
 import { electronApp, optimizer, is } from "@electron-toolkit/utils"
+import { execFile } from "child_process"
+import { kill } from "process"
+import log from "electron-log/main"
+
+log.transports.file.level = "info"
+log.transports.file.resolvePathFn = (vars) =>
+    join(vars.libraryDefaultDir, "../com.electron.imgmeta/electron.log")
+
+const isDevelopment = import.meta.env.DEV
 
 function createWindow(): void {
     // Create the browser window.
@@ -47,7 +56,18 @@ app.whenReady().then(() => {
         optimizer.watchWindowShortcuts(window)
     })
 
-    createWindow()
+    if (isDevelopment) {
+        createWindow()
+    } else {
+        // in development backend is started manually
+        runBackend()
+            .then(() => {
+                createWindow()
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
     app.on("activate", function () {
         // On macOS it's common to re-create a window in the app when the
@@ -65,5 +85,40 @@ app.on("window-all-closed", () => {
     }
 })
 
+app.on("quit", () => {
+    if (!isDevelopment) {
+        // in development server is killed manually
+        killBackend()
+    }
+})
+
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
+
+let backend
+function runBackend() {
+    return new Promise<void>((resolve, reject) => {
+        backend = execFile(
+            join(process.resourcesPath, "backend/backend"),
+            [],
+            {
+                windowsHide: true,
+                shell: true
+            },
+            (error) => {
+                if (error) {
+                    log.error(error)
+                    reject(error)
+                }
+            }
+        )
+
+        setTimeout(function () {
+            resolve()
+        }, 1000)
+    })
+}
+
+function killBackend() {
+    kill(backend.pid)
+}
