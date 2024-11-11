@@ -1,6 +1,5 @@
 [tool.black]
 line-length = 110
-skip-string-normalization = true
 
 [tool.pyright]
 include = ["main.py", "imgmeta"]
