@@ -16,8 +16,6 @@ def setup_logging():
     for logger in loggers:
         for handler in handlers:
             handler.setFormatter(
-                logging.Formatter(
-                    "%(asctime)s %(levelname)s %(message)s", datefmt="%d.%m.%y %H:%M:%S %Z"
-                )
+                logging.Formatter("%(asctime)s %(levelname)s %(message)s", datefmt="%d.%m.%y %H:%M:%S %Z")
             )
             logger.addHandler(handler)
