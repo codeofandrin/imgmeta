@@ -1,3 +1,5 @@
+import { FileInputStatusBasicType, ErrorType } from "./enums"
+
 export interface YearOptionContextType {
     yearFormat: string
     setFullYear: Function
@@ -15,4 +17,19 @@ export interface CustomTextContextType {
     setCustomText: Function
     resetCustomText: Function
     setIsValid: Function
+}
+
+export interface ErrorDataType {
+    code: number
+    detail: { msg: string; item: string }
+}
+
+export interface APIRequestResponseType {
+    isError: boolean
+    errorData: ErrorDataType | null
+}
+
+export interface StatusType {
+    type: FileInputStatusBasicType
+    error: { type: ErrorType; item: string | null } | null
 }

@@ -3,18 +3,27 @@ from typing import List
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from metadata import rename_images
+from errors import catch_exceptions_middleware
 
 
 app = FastAPI()
+app.middleware("http")(catch_exceptions_middleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.exception_handler(StarletteHTTPException)
+async def http_exception_handler(request, exc):
+    return JSONResponse(status_code=exc.status_code, content=exc.detail)
 
 
 class Base(BaseModel):
@@ -32,7 +41,7 @@ async def images(payload: Base):
         time_option=payload.time_option,
         custom_text=payload.custom_text,
     )
-    return {"msg": "Successful"}
+    return JSONResponse(content={"msg": "Successful"}, status_code=200)
 
 
 if __name__ == "__main__":

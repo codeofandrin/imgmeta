@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios"
 
 import { Server as ServerConst } from "../utils/constants"
+import { APIRequestResponseType, ErrorDataType } from "../utils/types"
 
 const client = axios.create({
     baseURL: ServerConst.apiBaseURL
@@ -11,24 +12,34 @@ async function request(
     url: string,
     data: Record<string, any>,
     headers: Record<string, any>
-): Promise<boolean> {
+): Promise<APIRequestResponseType> {
     const config = { method, url, data, headers }
-    let isError = false
     let response: AxiosResponse | null = null
     try {
         response = await client.request(config)
     } catch (err: any) {
-        console.log(err.response ? err.response.data["message"] : err)
-        isError = true
+        response = err.response
     }
+    console.log(response)
 
-    if (response !== null) {
+    let isError = false
+    if (response) {
         if (!(response.status >= 200 && response.status <= 308)) {
             isError = true
         }
     }
 
-    return isError
+    let errorData: ErrorDataType | null = null
+    if (isError) {
+        if (response !== null && response.status >= 400 && response.status < 500) {
+            errorData = {
+                code: response.data["code"],
+                detail: response.data["detail"]
+            }
+        }
+    }
+
+    return { isError, errorData }
 }
 
 export async function sendImgPaths(
@@ -36,7 +47,7 @@ export async function sendImgPaths(
     yearOption: string,
     timeOption: boolean,
     customText: string
-): Promise<boolean> {
+): Promise<APIRequestResponseType> {
     const payload = {
         paths: paths,
         year_option: yearOption,

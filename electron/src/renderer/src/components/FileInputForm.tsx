@@ -3,10 +3,11 @@ import { Button, FileInput } from "flowbite-react"
 
 import { sendImgPaths } from "../services/api"
 import Status from "./Status"
-import { FileInputStatusType } from "../utils/enums"
+import { FileInputStatusBasicType, ErrorType } from "../utils/enums"
 import useYearOptionContext from "../contexts/YearOptionContext"
 import useTimeOptionContext from "../contexts/TimeOptionContext"
 import useCustomTextContext from "../contexts/CustomTextContext"
+import { StatusType } from "../utils/types"
 import SVGSpinner from "../assets/icons/Spinner.svg?react"
 import SVGCross from "../assets/icons/Cross.svg?react"
 import "../styles/FileInputForm.css"
@@ -60,7 +61,7 @@ interface ImageFilesType {
 }
 
 export default function FileInputForm() {
-  const [status, setStatus] = useState<FileInputStatusType | null>(null)
+  const [status, setStatus] = useState<StatusType | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [fileInput, setFileInput] = useState<ImageFilesType>({
     ref: useRef<HTMLInputElement>(null),
@@ -98,12 +99,24 @@ export default function FileInputForm() {
       }
     }
 
-    await sendImgPaths(filePaths, yearFormat, timeDisplayed, customText).then((isError: boolean) => {
+    await sendImgPaths(filePaths, yearFormat, timeDisplayed, customText).then(({ isError, errorData }) => {
       setIsLoading(false)
+
       if (isError) {
-        setStatus(FileInputStatusType.error)
+        if (errorData === null) {
+          // unexpected
+          setStatus({
+            type: FileInputStatusBasicType.error,
+            error: { type: ErrorType.unexpected, item: null }
+          })
+        } else {
+          setStatus({
+            type: FileInputStatusBasicType.error,
+            error: { type: errorData["code"] as ErrorType, item: errorData["detail"]["item"] }
+          })
+        }
       } else {
-        setStatus(FileInputStatusType.success)
+        setStatus({ type: FileInputStatusBasicType.success, error: null })
       }
 
       setFileInput({
@@ -132,9 +145,7 @@ export default function FileInputForm() {
           handleRenameRequest={handleRenameRequest}
         />
       </div>
-      {status !== null && (
-        <Status isError={status === FileInputStatusType.error} filesAmount={fileInput.renamedAmount} />
-      )}
+      {status !== null && <Status status={status} filesAmount={fileInput.renamedAmount} />}
     </div>
   )
 }

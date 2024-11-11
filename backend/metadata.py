@@ -5,13 +5,25 @@ from typing import List
 
 from PIL import Image
 
+from errors import APIException, APIExceptionDetail
+from enums import ErrorType
+
 
 EXIF_DATETIME_TAG = 36867
+VALID_FILE_TYPES = (".png", ".jpeg", ".jpg")
 
 
 def _get_img_datetime(img_path: Path) -> datetime.datetime:
     img = Image.open(img_path)
     exif_data = img._getexif()  # type: ignore
+    if exif_data is None:
+        raise APIException(
+            status_code=422,
+            error_code=ErrorType.no_exif_data.value,
+            msg="No exif data available",
+            detail=APIExceptionDetail(msg=None, item=str(img_path)),
+        )
+
     dt_str = exif_data[EXIF_DATETIME_TAG]
     return datetime.datetime.strptime(dt_str, "%Y:%m:%d %H:%M:%S")
 
@@ -43,8 +55,15 @@ def rename_images(*, paths: List[str], year_option: str, time_option: bool, cust
     for path_str in paths:
         img_path = Path(path_str)
 
-        if img_path.suffix not in [".png", ".jpeg", ".jpg"]:
-            raise ValueError("files must be one of '.png', '.jpeg', '.jpg'")
+        if img_path.suffix not in VALID_FILE_TYPES:
+            raise APIException(
+                status_code=400,
+                error_code=ErrorType.invalid_file_type.value,
+                msg="Invalid file type",
+                detail=APIExceptionDetail(
+                    msg=f"File type must be one of {VALID_FILE_TYPES}", item=str(img_path)
+                ),
+            )
 
         img_dt = _get_img_datetime(img_path)
         _rename_filename(
