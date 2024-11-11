@@ -1,6 +1,2 @@
 venv
 node_modules
-
-backend/build
-backend/dist
-backend/__pycache__
