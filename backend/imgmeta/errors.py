@@ -1,7 +1,11 @@
+import logging
 from typing import Optional, Dict, TypedDict
 
 from fastapi import HTTPException
 from fastapi.responses import JSONResponse
+
+
+logger = logging.getLogger("uvicorn.error")
 
 
 class APIExceptionDetail(TypedDict):
@@ -28,5 +32,5 @@ async def catch_exceptions_middleware(request, call_next):
     try:
         return await call_next(request)
     except Exception:
-        # TODO: Add logging
+        logger.exception("Unexpected error occurred")
         return JSONResponse(content={"msg": "Internal Server Error"}, status_code=500)
