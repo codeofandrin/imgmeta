@@ -24,11 +24,12 @@ function getErrorMsg(errorType: ErrorType, item: string | null): string {
 }
 
 interface StatusPropsType {
+  className?: string
   status: StatusType
   filesAmount: number
 }
 
-export default function Status({ status, filesAmount }: StatusPropsType) {
+export default function Status({ className = "", status, filesAmount }: StatusPropsType) {
   let statusMsg = ""
   let statusColor = ""
   if (status.type === FileInputStatusBasicType.success) {
@@ -41,5 +42,5 @@ export default function Status({ status, filesAmount }: StatusPropsType) {
     }
   }
 
-  return <p className={`mt-2 text-sm ${statusColor}`}>{statusMsg}</p>
+  return <p className={`${className} mt-2 text-xs sm:text-sm ${statusColor}`}>{statusMsg}</p>
 }

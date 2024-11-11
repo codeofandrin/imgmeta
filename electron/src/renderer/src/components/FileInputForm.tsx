@@ -17,7 +17,7 @@ function FileInputWithClear({ fileInput, handleFilesChange, handleFilesClear }) 
     <div className="flex">
       <FileInput
         ref={fileInput.ref}
-        className={`dark w-72 border-0 xs:w-80 sm:w-96 ${fileInput.imageFiles !== null && "no-r-border"}`}
+        className={`dark w-full border-0 ${fileInput.imageFiles !== null && "no-r-border"}`}
         id="file-upload"
         onChange={handleFilesChange}
         multiple
@@ -132,20 +132,25 @@ export default function FileInputForm() {
   const renameBtnDisabled = !fileInput.imageFiles || !isCustomTextValid
 
   return (
-    <div className="mt-10 flex flex-col">
-      <div className="flex flex-col items-center justify-center sm:flex-row">
+    <div className="mt-10 flex w-72 flex-col items-center justify-center xs:w-80 sm:w-fit sm:flex-row sm:items-start">
+      <div className="flex w-full flex-col sm:w-96">
         <FileInputWithClear
           fileInput={fileInput}
           handleFilesChange={handleFilesChange}
           handleFilesClear={handleFilesClear}
         />
-        <RenameButton
-          disabled={renameBtnDisabled}
-          isLoading={isLoading}
-          handleRenameRequest={handleRenameRequest}
-        />
+        {status !== null && (
+          <Status className="hidden sm:block" status={status} filesAmount={fileInput.renamedAmount} />
+        )}
       </div>
-      {status !== null && <Status status={status} filesAmount={fileInput.renamedAmount} />}
+      <RenameButton
+        disabled={renameBtnDisabled}
+        isLoading={isLoading}
+        handleRenameRequest={handleRenameRequest}
+      />
+      {status !== null && (
+        <Status className="sm:hidden" status={status} filesAmount={fileInput.renamedAmount} />
+      )}
     </div>
   )
 }
