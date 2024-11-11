@@ -18,20 +18,26 @@ export default function Example() {
   const { yearFormat } = useYearOptionContext()
   const { timeDisplayed } = useTimeOptionContext()
   const { customText } = useCustomTextContext()
-  const [now] = useState(new Date())
+  const [now] = useState(new Date("2001-01-02T09:01:02"))
 
+  const day = now.getDate()
   const month = now.getMonth() + 1
   const year = now.getFullYear()
-  const day = now.getDate()
 
+  const dayStr = day < 10 ? "0" + day : day.toString()
+  const monthStr = month < 10 ? "0" + month : month.toString()
   const yearStr = yearFormat === "YYYY" ? year : year.toString().substring(2)
-  let dateTimeStr = `${yearStr}${month}${day}`
+
+  let dateTimeStr = `${yearStr}${monthStr}${dayStr}`
   if (timeDisplayed) {
     const hour = now.getHours()
     const minute = now.getMinutes()
     const second = now.getSeconds()
+    const hourStr = hour < 10 ? "0" + hour : hour.toString()
+    const minuteStr = minute < 10 ? "0" + minute : minute.toString()
+    const secondStr = second < 10 ? "0" + second : second.toString()
 
-    dateTimeStr += `_${hour}${minute}${second}`
+    dateTimeStr += `_${hourStr}${minuteStr}${secondStr}`
   }
 
   let fileNameStr_sm = ""
