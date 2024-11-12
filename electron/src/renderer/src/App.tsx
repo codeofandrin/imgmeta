@@ -10,8 +10,8 @@ import Example from "./components/Example"
 export default function App() {
   return (
     <ProviderComposer components={[YearOptionProvider, TimeOptionProvider, CustomTextProvider]}>
-      <div className="mb-10 mt-8 sm:mt-14">
-        <div className="flex flex-col items-center px-[5%]">
+      <div className="mb-10 mt-8 px-5 sm:mt-14">
+        <div className="flex flex-col items-center">
           <h1 className="font-bord text-3xl text-slate-200">imgmeta</h1>
           <p className="mt-4 text-sm sm:text-base">
             Organize your files by adding the date and time to the filenames.
