@@ -14,24 +14,20 @@ async function request(
     headers: Record<string, any>
 ): Promise<APIRequestResponseType> {
     const config = { method, url, data, headers }
+
+    let isError = false
     let response: AxiosResponse | null = null
     try {
         response = await client.request(config)
     } catch (err: any) {
+        isError = true
         response = err.response
     }
     console.log(response)
 
-    let isError = false
-    if (response) {
-        if (!(response.status >= 200 && response.status <= 308)) {
-            isError = true
-        }
-    }
-
     let errorData: ErrorDataType | null = null
     if (isError) {
-        if (response !== null && response.status >= 400 && response.status < 500) {
+        if (response && response.status >= 400 && response.status < 500) {
             errorData = {
                 code: response.data["code"],
                 detail: response.data["detail"]
