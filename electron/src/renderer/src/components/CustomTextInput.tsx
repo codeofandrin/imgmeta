@@ -25,7 +25,7 @@ export default function CustomTextInput() {
           Custom text
         </label>
         <Tooltip
-          className="ml-1 max-w-lg delay-300"
+          className="mx-1 max-w-lg text-xs delay-300"
           content="The text that is placed after date and time, before the actual filename. Cannot contain slashes ('/') and cannot exceed 255 characters."
           style="light">
           <SVGInfo className="ml-2 h-4 w-4 text-white transition-colors duration-200 hover:text-blue-500" />
