@@ -42,5 +42,5 @@ export default function Status({ className = "", status, filesAmount }: StatusPr
     }
   }
 
-  return <p className={`${className} mt-3 text-xs sm:mt-2 sm:text-sm ${statusColor}`}>{statusMsg}</p>
+  return <p className={`${className} mt-2.5 text-xs sm:mt-2 sm:text-sm ${statusColor}`}>{statusMsg}</p>
 }

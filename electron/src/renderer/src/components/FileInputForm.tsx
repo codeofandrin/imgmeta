@@ -132,7 +132,7 @@ export default function FileInputForm() {
   const renameBtnDisabled = !fileInput.imageFiles || !isCustomTextValid
 
   return (
-    <div className="mt-10 flex w-72 flex-col items-center justify-center xs:w-80 sm:w-fit sm:flex-row sm:items-start">
+    <div className="mt-10 flex w-72 flex-col justify-center xs:w-80 sm:w-fit sm:flex-row sm:items-start">
       <div className="flex w-full flex-col sm:w-96">
         <FileInputWithClear
           fileInput={fileInput}
