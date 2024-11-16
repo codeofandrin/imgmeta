@@ -39,6 +39,9 @@ export default function AboutModal() {
   const appAuthor = getAppAuthor()
   const authorHomepage = getAuthorHomepage()
 
+  // use a variable and add whitespace at end because prettier adds '{" "}'
+  const authorTitle = "Author: "
+
   return (
     <dialog
       tabIndex={-1}
@@ -53,7 +56,7 @@ export default function AboutModal() {
           <div className="mt-4 text-sm">
             <p>Version {appVersion}</p>
             <p className="mt-1">
-              Author:{" "}
+              {authorTitle}
               <ExternalLink
                 href={authorHomepage}
                 className="font-medium text-blue-600 transition-colors duration-150 hover:text-blue-400">
