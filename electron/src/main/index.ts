@@ -9,8 +9,6 @@ log.transports.file.level = "info"
 log.transports.file.resolvePathFn = (vars) =>
     join(vars.libraryDefaultDir, "../com.electron.imgmeta/electron.log")
 
-const isDevelopment = import.meta.env.DEV
-
 function createWindow(): void {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
@@ -56,7 +54,7 @@ app.whenReady().then(() => {
         optimizer.watchWindowShortcuts(window)
     })
 
-    if (isDevelopment) {
+    if (is.dev) {
         createWindow()
     } else {
         // in development backend is started manually
@@ -86,7 +84,7 @@ app.on("window-all-closed", () => {
 })
 
 app.on("quit", () => {
-    if (!isDevelopment) {
+    if (!is.dev) {
         // in development server is killed manually
         killBackend()
     }
