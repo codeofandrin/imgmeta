@@ -1,9 +1,11 @@
-import { app, shell, BrowserWindow } from "electron"
+import { app, shell, BrowserWindow, Menu, ipcMain, MenuItem } from "electron"
 import { join } from "path"
 import { electronApp, optimizer, is } from "@electron-toolkit/utils"
 import { execFile } from "child_process"
 import { kill } from "process"
 import log from "electron-log/main"
+
+import { getMenu } from "./menu"
 
 log.transports.file.level = "info"
 log.transports.file.resolvePathFn = (vars) =>
@@ -14,6 +16,8 @@ function createWindow(): void {
     const mainWindow = new BrowserWindow({
         width: 900,
         height: 670,
+        minWidth: 400,
+        minHeight: 670,
         show: false,
         autoHideMenuBar: true,
         webPreferences: {
@@ -21,6 +25,8 @@ function createWindow(): void {
             sandbox: false
         }
     })
+
+    Menu.setApplicationMenu(getMenu(mainWindow.webContents))
 
     mainWindow.on("ready-to-show", () => {
         mainWindow.show()
@@ -71,6 +77,11 @@ app.whenReady().then(() => {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    })
+
+    ipcMain.on("menu-about", function (_event, isOpen: boolean) {
+        const aboutMenuItem = Menu.getApplicationMenu()?.getMenuItemById("about") as MenuItem
+        aboutMenuItem.enabled = !isOpen
     })
 })
 

@@ -33,3 +33,9 @@ export interface StatusType {
     type: FileInputStatusBasicType
     error: { type: ErrorType; item: string | null } | null
 }
+
+export interface AboutModalContextType {
+    isOpen: boolean
+    openModal: Function
+    closeModal: Function
+}

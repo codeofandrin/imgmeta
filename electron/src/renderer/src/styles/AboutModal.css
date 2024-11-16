@@ -1,0 +1,4 @@
+#about-modal {
+    /* removes ugly outline when 'ESC' pressed */
+    @apply shadow-none outline-0 !important;
+}

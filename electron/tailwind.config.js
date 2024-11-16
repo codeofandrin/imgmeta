@@ -11,5 +11,5 @@ module.exports = {
             ...defaultTheme.screens
         }
     },
-    plugins: [flowbite.plugin()]
+    plugins: [flowbite.plugin(), require("daisyui")]
 }
