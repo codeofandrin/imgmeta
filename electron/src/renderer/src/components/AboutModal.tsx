@@ -43,7 +43,7 @@ export default function AboutModal() {
       open={isOpen}
       className="modal z-[999] bg-black/40 backdrop-blur-[2px]"
       onClose={handleClose}>
-      <div className="modal-box max-w-96">
+      <div className="modal-box max-w-96 bg-slate-800">
         <div className="flex flex-col items-center">
           <img src={ImgAppLogo} className="w-14"></img>
           <h3 className="mt-2 font-bold">About {appName}</h3>
