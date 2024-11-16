@@ -35,7 +35,7 @@ export function getMenu(mainWebContents: WebContents) {
         },
         // { role: 'editMenu' }
         {
-            label: "Test",
+            label: "Edit",
             submenu: [
                 { role: "undo" },
                 { role: "redo" },
