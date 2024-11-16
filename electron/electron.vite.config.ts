@@ -24,6 +24,8 @@ export default defineConfig({
         define: {
             __APP_NAME__: s(packageJson.name),
             __APP_VERSION__: s(packageJson.version),
+            __APP_AUTHOR__: s(packageJson.author),
+            __AUTHOR_HOMEPAGE__: s(packageJson.homepage)
         }
     }
 })

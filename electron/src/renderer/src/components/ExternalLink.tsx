@@ -1,5 +1,5 @@
 interface ExternalLinkPropsType {
-  children?: React.ReactElement
+  children?: any
   href: string
   className?: string
   title?: string

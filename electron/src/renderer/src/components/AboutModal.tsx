@@ -36,6 +36,8 @@ export default function AboutModal() {
 
   const appName = getAppName()
   const appVersion = getAppVersion()
+  const appAuthor = getAppAuthor()
+  const authorHomepage = getAuthorHomepage()
 
   return (
     <dialog
@@ -48,9 +50,19 @@ export default function AboutModal() {
         <div className="flex flex-col items-center">
           <img src={ImgAppLogo} className="w-14"></img>
           <h3 className="mt-2 font-bold">About {appName}</h3>
-          <p className="mt-3 text-sm">Version {appVersion}</p>
+          <div className="mt-4 text-sm">
+            <p>Version {appVersion}</p>
+            <p className="mt-1">
+              Author:{" "}
+              <ExternalLink
+                href={authorHomepage}
+                className="font-medium text-blue-600 transition-colors duration-150 hover:text-blue-400">
+                {appAuthor}
+              </ExternalLink>
+            </p>
+          </div>
           <ExternalLink href={Socials.repository} title="Source Code Repository">
-            <SVGGitHub className="mt-3 text-gray-500 transition-colors duration-150 hover:text-gray-300" />
+            <SVGGitHub className="mt-4 text-gray-500 transition-colors duration-150 hover:text-gray-300" />
           </ExternalLink>
         </div>
         <div className="mt-3 flex justify-end">

@@ -5,3 +5,11 @@ export function getAppName() {
 export function getAppVersion() {
     return __APP_VERSION__
 }
+
+export function getAppAuthor() {
+    return __APP_AUTHOR__
+}
+
+export function getAuthorHomepage() {
+    return __AUTHOR_HOMEPAGE__
+}
