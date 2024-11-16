@@ -3,6 +3,7 @@ import { Button } from "flowbite-react"
 
 import ExternalLink from "./ExternalLink"
 import { Socials } from "../utils/constants"
+import { getAppName, getAppVersion, getAppAuthor, getAuthorHomepage } from "../utils/app-info"
 import ImgAppLogo from "../assets/images/AppLogo.png"
 import SVGGitHub from "../assets/icons/GitHub.svg?react"
 import "../styles/AboutModal.css"
@@ -33,8 +34,8 @@ export default function AboutModal() {
     setIsOpen(false)
   }
 
-  const appName = __APP_NAME__
-  const appVersion = __APP_VERSION__
+  const appName = getAppName()
+  const appVersion = getAppVersion()
 
   return (
     <dialog
