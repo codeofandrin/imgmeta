@@ -95,6 +95,7 @@ export default function FileInputForm() {
     const imageFiles = fileInput.imageFiles
     if (imageFiles) {
       for (let i = 0; i < imageFiles.length; i++) {
+        // @ts-ignore: 'path' exists here
         filePaths.push(imageFiles[i].path)
       }
     }
