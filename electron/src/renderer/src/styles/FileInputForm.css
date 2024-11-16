@@ -2,10 +2,6 @@
     @apply ml-0 mt-5 w-full sm:ml-10 sm:mt-0 sm:w-auto;
 }
 
-#btn-rename.active {
-    @apply active:bg-blue-900 !important;
-}
-
 #file-upload {
     @apply focus:border-slate-600 focus:ring-0 !important;
 }
