@@ -61,15 +61,13 @@ export function getMenu(mainWebContents: WebContents) {
         {
             label: "View",
             submenu: [
-                { role: "reload" },
-                { role: "forceReload" },
-                { role: "toggleDevTools" },
-                { type: "separator" },
                 { role: "resetZoom" },
                 { role: "zoomIn" },
                 { role: "zoomOut" },
                 { type: "separator" },
-                { role: "togglefullscreen" }
+                { role: "togglefullscreen" },
+                { type: "separator" },
+                { role: "toggleDevTools" }
             ]
         },
         // { role: 'windowMenu' }
