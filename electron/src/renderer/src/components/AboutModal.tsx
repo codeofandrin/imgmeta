@@ -51,7 +51,7 @@ export default function AboutModal() {
       onClose={handleClose}>
       <div className="modal-box max-w-96 bg-slate-800">
         <div className="flex flex-col items-center">
-          <img src={ImgAppLogo} className="w-14"></img>
+          <img src={ImgAppLogo} className="w-16"></img>
           <h3 className="mt-2 font-bold">About {appName}</h3>
           <div className="mt-4 text-sm">
             <p>Version {appVersion}</p>
