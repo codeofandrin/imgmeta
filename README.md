@@ -15,4 +15,21 @@
 
 <br>
 
+## About
+**imgmeta** is a desktop application that allows you to organize your photos by adding the date and time
+to the filenames. This changes a file e.g. named `P1050140.png` to `20241005_P1050140`, where `2024` is the year, 
+`10` the month and `05` the day.
 
+## Download
+TODO ...
+
+## Contributing
+
+TODO ...
+
+## License
+
+See [LICENSE](./LICENSE) for details.
+
+Please note that the license does not include the project's logos, branding, or other graphical assets. 
+These assets are the property of their respective owners.
