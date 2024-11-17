@@ -21,6 +21,7 @@ to the filenames. This changes a file e.g. named `P1050140.png` to `20241005_P10
 `10` the month and `05` the day.
 
 ## Download
+Currently, macOS is the only supported operating system (Windows is planned).
 lore ipsum TODO
 
 ## Feedback
