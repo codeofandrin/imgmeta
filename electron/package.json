@@ -3,8 +3,11 @@
   "version": "0.1.0a",
   "description": "Organize your photos by adding the date and time to the filenames.",
   "main": "./out/main/index.js",
-  "author": "Puncher1",
-  "homepage": "https://github.com/puncher1",
+  "author": {
+    "name": "Andrin Schaller",
+    "url": "https://github.com/codeofandrin"
+  },
+  "license": "SEE LICENSE FILE",
   "scripts": {
     "format": "prettier --write --list-different .",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",

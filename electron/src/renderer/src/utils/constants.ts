@@ -3,5 +3,5 @@ export class Server {
 }
 
 export class Socials {
-    static repository = "https://github.com/puncher1/imgmeta"
+    static repository = "https://github.com/codeofandrin/imgmeta"
 }

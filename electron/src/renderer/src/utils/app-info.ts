@@ -13,7 +13,3 @@ export function getAppVersion() {
 export function getAppAuthor() {
     return __APP_AUTHOR__
 }
-
-export function getAuthorHomepage() {
-    return __AUTHOR_HOMEPAGE__
-}

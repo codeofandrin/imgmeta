@@ -3,7 +3,7 @@ import { Button } from "flowbite-react"
 
 import ExternalLink from "./ExternalLink"
 import { Socials } from "../utils/constants"
-import { getAppName, getAppVersion, getAppAuthor, getAuthorHomepage } from "../utils/app-info"
+import { getAppName, getAppVersion, getAppAuthor } from "../utils/app-info"
 import ImgAppLogo from "../assets/images/AppLogo.png"
 import SVGGitHub from "../assets/icons/GitHub.svg?react"
 import "../styles/AboutModal.css"
@@ -37,7 +37,6 @@ export default function AboutModal() {
   const appName = getAppName()
   const appVersion = getAppVersion()
   const appAuthor = getAppAuthor()
-  const authorHomepage = getAuthorHomepage()
 
   // use a variable and add whitespace at end because prettier adds '{" "}'
   const authorTitle = "Author: "
@@ -58,9 +57,9 @@ export default function AboutModal() {
             <p className="mt-1">
               {authorTitle}
               <ExternalLink
-                href={authorHomepage}
+                href={appAuthor.url}
                 className="font-medium text-blue-600 transition-colors duration-150 hover:text-blue-400">
-                {appAuthor}
+                {appAuthor.name}
               </ExternalLink>
             </p>
           </div>

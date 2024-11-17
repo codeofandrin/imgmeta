@@ -36,7 +36,7 @@ linux:
     - AppImage
     - snap
     - deb
-  maintainer: github.com/puncher1
+  maintainer: github.com/codeofandrin
   category: Utility
 appImage:
   artifactName: ${name}-${version}.${ext}
