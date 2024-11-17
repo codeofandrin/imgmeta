@@ -24,7 +24,6 @@ to the filenames. This changes a file e.g. named `P1050140.png` to `20241005_P10
 TODO ...
 
 ## Feedback
-
 Whether you've found a bug or have a feature request, your input is highly valued! 
 Please feel free to open an issue on the [GitHub Issues page](https://github.com/codeofandrin/imgmeta/issues) 
 to report bugs or suggest enhancements.
@@ -33,7 +32,6 @@ If you have general questions or need support, you can also open a discussion on
 [GitHub Discussions page](https://github.com/codeofandrin/imgmeta/discussions).
 
 ## Contributing
-
 TODO ...
 
 ## License
