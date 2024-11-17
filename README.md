@@ -21,7 +21,7 @@ to the filenames. This changes a file e.g. named `P1050140.png` to `20241005_P10
 `10` the month and `05` the day.
 
 ## Download
-TODO ...
+lore ipsum TODO
 
 ## Feedback
 Whether you've found a bug or have a feature request, your input is highly valued! 
@@ -32,10 +32,9 @@ If you have general questions or need support, you can also open a discussion on
 [GitHub Discussions page](https://github.com/codeofandrin/imgmeta/discussions).
 
 ## Contributing
-TODO ...
+lorem ipsum TODO
 
 ## License
-
 See [LICENSE](./LICENSE) for details.
 
 Please note that the license does not include the project's logos, branding, or other graphical assets. 
